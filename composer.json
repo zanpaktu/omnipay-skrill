@@ -19,12 +19,19 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Omnipay\\Skrill\\" : "src/" }
+        "psr-0": {
+            "Omnipay\\Skrill\\": "src/"
+        }
     },
     "require": {
         "omnipay/common": "~2.0"
     },
     "require-dev": {
         "omnipay/tests": "~2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
     }
 }
