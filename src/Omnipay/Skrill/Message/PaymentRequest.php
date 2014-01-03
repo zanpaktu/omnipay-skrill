@@ -545,7 +545,7 @@ class PaymentRequest extends AbstractRequest
      */
     public function setCustomerDateOfBirth($value)
     {
-        return $this->setParameter('customerdateOfBirth', $value);
+        return $this->setParameter('customerDateOfBirth', $value);
     }
 
     /**
