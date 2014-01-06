@@ -2,9 +2,9 @@
 namespace Omnipay\Skrill\Message;
 
 /**
- * Skrill Prepare Response
+ * Skrill Authorize Transfer Response
  */
-class PrepareResponse extends Response
+class AuthorizeTransferResponse extends Response
 {
     /**
      * Get the session identifier to be submitted at the next step.

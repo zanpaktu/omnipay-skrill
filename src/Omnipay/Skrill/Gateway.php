@@ -2,25 +2,29 @@
 namespace Omnipay\Skrill;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\Skrill\Message\PrepareRequest;
 
 /**
  * Skrill Gateway
  */
 class Gateway extends AbstractGateway
 {
-    const API_VERSION = '2.11'; // 2012-01-25
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'Skrill';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultParameters()
     {
         return array(
-            'email'    => '',
-            'testMode' => false,
+            'email'     => '',
+            'statusUrl' => '',
+            'testMode'  => false,
         );
     }
 
@@ -54,46 +58,44 @@ class Gateway extends AbstractGateway
         return $this->setParameter('statusUrl', $value);
     }
 
-    public function preparePayment(array $parameters = array())
-    {
-        return $this->createRequest('\Omnipay\Skrill\Message\PaymentRequest', $parameters);
-    }
-
     /**
-     * @see GatewayInterface::purchase()
+     * {@inheritdoc}
      */
     public function purchase(array $parameters = array())
     {
-        return $this->preparePayment($parameters);
+        return $this->createRequest('Omnipay\Skrill\Message\PaymentRequest', $parameters);
     }
 
     /**
-     * Authorisation and Preparation of the Payment
-     * @param  array  $parameters request parameters
-     * @return mixed              response
+     * Authorize and prepare a transfer.
+     *
+     * @param  array                             $parameters  request parameters
+     * @return Message\AuthorizeTransferRequest               response
      */
-    public function prepare(array $parameters = array())
+    public function authorizeTransfer(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Skrill\Message\PrepareRequest', $parameters);
+        return $this->createRequest('Omnipay\Skrill\Message\AuthorizeTransferRequest', $parameters);
     }
 
     /**
-     * Execution of the Transfer
+     * Execution of the Transfer.
+     *
      * @param  array  $parameters request parameters
      * @return mixed              response
      */
     public function transfer(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Skrill\Message\TransferRequest', $parameters);
+        return $this->createRequest('Omnipay\Skrill\Message\TransferRequest', $parameters);
     }
 
     /**
-     * Authorise and prepare a refund.
+     * Authorize and prepare a refund.
+     *
      * @param  array                  $parameters  refund parameters
      * @return RefundPrepareResponse               response
      */
     public function prepareRefund(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Skrill\Message\RefundPrepareRequest', $parameters);
+        return $this->createRequest('Omnipay\Skrill\Message\RefundPrepareRequest', $parameters);
     }
 }

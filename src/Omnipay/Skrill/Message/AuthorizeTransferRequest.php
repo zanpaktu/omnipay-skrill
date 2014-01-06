@@ -2,9 +2,9 @@
 namespace Omnipay\Skrill\Message;
 
 /**
- * Skrill Prepare Request
+ * Skrill Authorize Transfer Request
  */
-class PrepareRequest extends AuthRequest
+class AuthorizeTransferRequest extends AuthRequest
 {
     /**
      * Get the endpoint for this request.
