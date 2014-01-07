@@ -95,4 +95,24 @@ class GatewayTest extends GatewayTestCase
         $this->assertNull($response->getCode());
         $this->assertSame('BALANCE_NOT_ENOUGH', $response->getMessage());
     }
+
+    public function testTransferProcessed()
+    {
+        $this->setMockHttpResponse('TransferProcessed.txt');
+
+        $request = $this->gateway->transfer(array(
+            'sessionId' => '761d416b605f1d438326b890025ad562'
+        ));
+        $response = $request->send();
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame(20.12, $response->getAmount());
+        $this->assertSame('SEK', $response->getCurrency());
+        $this->assertSame('1046551278', $response->getTransactionReference());
+        $this->assertSame(Message\TransferResponse::STATUS_PROCESSED, $response->getStatus());
+        $this->assertSame('processed', $response->getStatusMessage());
+
+        $this->assertSame($response->getStatus(), $response->getCode());
+        $this->assertSame($response->getStatusMessage(), $response->getMessage());
+    }
 }
