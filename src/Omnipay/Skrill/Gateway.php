@@ -5,6 +5,11 @@ use Omnipay\Common\AbstractGateway;
 
 /**
  * Skrill Gateway
+ *
+ * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ * @version 2.0.0
  */
 class Gateway extends AbstractGateway
 {
@@ -23,43 +28,85 @@ class Gateway extends AbstractGateway
     {
         return array(
             'email'     => '',
-            'statusUrl' => '',
+            'notifyUrl' => '',
             'testMode'  => false,
         );
     }
 
+    /**
+     * Get the merchant's email address.
+     *
+     * @return string email
+     */
     public function getEmail()
     {
         return $this->getParameter('email');
     }
 
+    /**
+     * Set the merchant's email address.
+     *
+     * @param string $value email
+     * @return self
+     */
     public function setEmail($value)
     {
         return $this->setParameter('email', $value);
     }
 
+    /**
+     * Get the merchant's MD5 API/MQI password.
+     *
+     * @return string password
+     */
     public function getPassword()
     {
         return $this->getParameter('password');
     }
 
+    /**
+     * Set the merchant's MD5 API/MQI password.
+     *
+     * @param string $value password
+     * @return self
+     */
     public function setPassword($value)
     {
         return $this->setParameter('password', $value);
     }
 
-    public function getStatusUrl()
+    /**
+     * Get the URL to which the transaction details will be posted after the payment
+     * process is complete.
+     *
+     * @return string notify url
+     */
+    public function getNotifyUrl()
     {
-        return $this->getParameter('statusUrl');
-    }
-
-    public function setStatusUrl($value)
-    {
-        return $this->setParameter('statusUrl', $value);
+        return $this->getParameter('notifyUrl');
     }
 
     /**
-     * {@inheritdoc}
+     * Set the URL to which the transaction details will be posted after the payment
+     * process is complete.
+     *
+     * Alternatively you may specify an email address to which you would like to receive
+     * the results. If the notify url is omitted, no transaction details will be sent to
+     * the merchant.
+     *
+     * @param string $value notify url
+     * @return self
+     */
+    public function setNotifyUrl($value)
+    {
+        return $this->setParameter('notifyUrl', $value);
+    }
+
+    /**
+     * Create a new charge.
+     *
+     * @param  array                    $parameters  request parameters
+     * @return Message\PaymentResponse               response
      */
     public function purchase(array $parameters = array())
     {
@@ -69,8 +116,8 @@ class Gateway extends AbstractGateway
     /**
      * Authorize and prepare a transfer.
      *
-     * @param  array                             $parameters  request parameters
-     * @return Message\AuthorizeTransferRequest               response
+     * @param  array                      $parameters  request parameters
+     * @return Message\AuthorizeResponse               response
      */
     public function authorizeTransfer(array $parameters = array())
     {
@@ -78,10 +125,10 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * Execution of the Transfer.
+     * Create a new transfer.
      *
-     * @param  array  $parameters request parameters
-     * @return mixed              response
+     * @param  array                     $parameters  request parameters
+     * @return Message\TransferResponse               response
      */
     public function transfer(array $parameters = array())
     {
@@ -91,11 +138,11 @@ class Gateway extends AbstractGateway
     /**
      * Authorize and prepare a refund.
      *
-     * @param  array                  $parameters  refund parameters
-     * @return RefundPrepareResponse               response
+     * @param  array                      $parameters  request parameters
+     * @return Message\AuthorizeResponse               response
      */
-    public function prepareRefund(array $parameters = array())
+    public function authorizeRefund(array $parameters = array())
     {
-        return $this->createRequest('Omnipay\Skrill\Message\RefundPrepareRequest', $parameters);
+        return $this->createRequest('Omnipay\Skrill\Message\AuthorizeRefundRequest', $parameters);
     }
 }

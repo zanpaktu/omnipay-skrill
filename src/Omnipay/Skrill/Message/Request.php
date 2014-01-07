@@ -5,23 +5,40 @@ use Omnipay\Common\Message\AbstractRequest;
 
 /**
  * Skrill Request
+ *
+ * The Skrill Automated Payments Interface enables you to execute automated requests to
+ * Skrill, including:
+ *
+ * * Send money transactions to customers
+ * * Skrill 1-Tap transactions
+ * * Manage recurring payments
+ * * Checking the status of transactions and recurring payments
+ * * Downloading account histories and repost status reports
+ *
+ * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ * @version 2.16 Automated Payments Interface
  */
 abstract class Request extends AbstractRequest
 {
     /**
      * Get the endpoint for this request.
+     *
      * @return string endpoint
      */
     abstract protected function getEndpoint();
 
     /**
      * Get the action name for this request.
+     *
      * @return string action name
      */
     abstract protected function getAction();
 
     /**
      * Get the data for this request.
+     *
      * @return array request data
      */
     public function getData()
@@ -33,7 +50,8 @@ abstract class Request extends AbstractRequest
 
     /**
      * Send the skrill request.
-     * @return AbstractResponse
+     *
+     * @return Response
      */
     public function sendData($data)
     {
@@ -46,8 +64,9 @@ abstract class Request extends AbstractRequest
 
     /**
      * Create a proper response based on the request.
+     *
      * @param  \SimpleXMLElement  $xml  raw response
-     * @return AbstractResponse         response object for this request
+     * @return Response                 response for this request
      */
     protected function createResponse($xml)
     {

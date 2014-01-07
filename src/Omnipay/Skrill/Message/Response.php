@@ -5,6 +5,11 @@ use Omnipay\Common\Message\AbstractResponse;
 
 /**
  * Skrill Response
+ *
+ * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ * @version 2.16 Automated Payments Interface
  */
 abstract class Response extends AbstractResponse
 {

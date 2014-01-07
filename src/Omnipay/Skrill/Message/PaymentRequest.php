@@ -24,6 +24,8 @@ use Omnipay\Common\Message\AbstractRequest;
  * merchant's server and Skrill.
  *
  * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
  * @version 6.19 Merchant Integration Manual
  */
 class PaymentRequest extends AbstractRequest
@@ -203,40 +205,14 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the URL to which the transaction details will be posted after the payment
-     * process is complete.
-     *
-     * @return string status url
-     */
-    public function getStatusUrl()
-    {
-        return $this->getParameter('statusUrl');
-    }
-
-    /**
-     * Set the URL to which the transaction details will be posted after the payment
-     * process is complete.
-     *
-     * Alternatively you may specify an email address to which you would like to receive
-     * the results. If the status url is omitted, no transaction details will be sent to
-     * the merchant.
-     *
-     * @param string $value status url
-     */
-    public function setStatusUrl($value)
-    {
-        return $this->setParameter('statusUrl', $value);
-    }
-
-    /**
      * Get the secondary URL to which the transaction details will be posted after the
      * payment process is complete.
      *
-     * @return string status url 2
+     * @return string notify url 2
      */
-    public function getStatusUrl2()
+    public function getNotifyUrl2()
     {
-        return $this->getParameter('statusUrl2');
+        return $this->getParameter('notifyUrl2');
     }
 
     /**
@@ -246,11 +222,11 @@ class PaymentRequest extends AbstractRequest
      * Alternatively you may specify an email address to which you would like to receive
      * the results.
      *
-     * @param string $value status url 2
+     * @param string $value notify url 2
      */
-    public function setStatusUrl2($value)
+    public function setNotifyUrl2($value)
     {
-        return $this->setParameter('statusUrl2', $value);
+        return $this->setParameter('notifyUrl2', $value);
     }
 
     /**
@@ -765,14 +741,14 @@ class PaymentRequest extends AbstractRequest
         $data['pay_to_email'] = $this->getEmail();
         $data['language'] = $this->getLanguage();
         $data['recipient_description'] = $this->getRecipientDescription();
-        $data['transaction_id'] = $this->getTransactionReference();
+        $data['transaction_id'] = $this->getTransactionId();
         $data['return_url'] = $this->getReturnUrl();
         $data['return_url_text'] = $this->getReturnUrlText();
         $data['return_url_target'] = $this->getReturnUrlTarget();
         $data['cancel_url'] = $this->getCancelUrl();
         $data['cancel_url_target'] = $this->getCancelUrlTarget();
-        $data['status_url'] = $this->getStatusUrl();
-        $data['status_url2'] = $this->getStatusUrl2();
+        $data['status_url'] = $this->getNotifyUrl();
+        $data['status_url2'] = $this->getNotifyUrl2();
         $data['new_window_redirect'] = $this->getNewWindowRedirect();
         $data['hide_login'] = $this->getHideLogin();
         $data['confirmation_note'] = $this->getConfirmationNote();

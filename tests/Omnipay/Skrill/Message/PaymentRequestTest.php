@@ -26,14 +26,14 @@ class PaymentRequestTest extends TestCase
             'currency'             => 'EUR',
             'details'              => array('key' => 'value'),
             'recipientDescription' => 'phpunit',
-            'transactionReference' => 'ref',
+            'transactionId'        => 'ref',
             'returnUrl'            => 'http://php.unit/return',
             'returnUrlText'        => 'return',
             'returnUrlTarget'      => 3,
             'cancelUrl'            => 'http://php.unit/cancel',
             'cancelUrlTarget'      => 3,
-            'statusUrl'            => 'http://php.unit/status',
-            'statusUrl2'           => 'http://php.unit/status2',
+            'notifyUrl'            => 'http://php.unit/status',
+            'notifyUrl2'           => 'http://php.unit/status2',
             'newWindowRedirect'    => 0,
             'hideLogin'            => 0,
             'confirmationNote'     => 'confirmation note',
@@ -68,14 +68,14 @@ class PaymentRequestTest extends TestCase
         $this->assertSame('value', $data['details1_text']);
 
         $this->assertSame($expectedData['recipientDescription'], $data['recipient_description']);
-        $this->assertSame($expectedData['transactionReference'], $data['transaction_id']);
+        $this->assertSame($expectedData['transactionId'], $data['transaction_id']);
         $this->assertSame($expectedData['returnUrl'], $data['return_url']);
         $this->assertSame($expectedData['returnUrlText'], $data['return_url_text']);
         $this->assertSame($expectedData['returnUrlTarget'], $data['return_url_target']);
         $this->assertSame($expectedData['cancelUrl'], $data['cancel_url']);
         $this->assertSame($expectedData['cancelUrlTarget'], $data['cancel_url_target']);
-        $this->assertSame($expectedData['statusUrl'], $data['status_url']);
-        $this->assertSame($expectedData['statusUrl2'], $data['status_url2']);
+        $this->assertSame($expectedData['notifyUrl'], $data['status_url']);
+        $this->assertSame($expectedData['notifyUrl2'], $data['status_url2']);
         $this->assertSame($expectedData['newWindowRedirect'], $data['new_window_redirect']);
         $this->assertSame($expectedData['hideLogin'], $data['hide_login']);
         $this->assertSame($expectedData['confirmationNote'], $data['confirmation_note']);

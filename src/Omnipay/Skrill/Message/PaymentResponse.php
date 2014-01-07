@@ -11,6 +11,8 @@ use Omnipay\Common\Message\RedirectResponseInterface;
  * and thus the URL to where we shall redirect users to the payment page.
  *
  * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
  * @version 6.19 Merchant Integration Manual
  */
 class PaymentResponse extends AbstractResponse implements RedirectResponseInterface

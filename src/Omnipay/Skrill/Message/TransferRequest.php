@@ -3,12 +3,16 @@ namespace Omnipay\Skrill\Message;
 
 /**
  * Skrill Transfer Request
+ *
+ * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ * @version 2.16 Automated Payments Interface
  */
 class TransferRequest extends Request
 {
     /**
-     * Get the endpoint for this request.
-     * @return string endpoint
+     * {@inheritdoc}
      */
     protected function getEndpoint()
     {
@@ -16,8 +20,7 @@ class TransferRequest extends Request
     }
 
     /**
-     * Get the action name for this request.
-     * @return string action name
+     * {@inheritdoc}
      */
     protected function getAction()
     {
@@ -26,6 +29,7 @@ class TransferRequest extends Request
 
     /**
      * Get the session identifier from the previous step.
+     *
      * @return string session id
      */
     public function getSessionId()
@@ -35,7 +39,9 @@ class TransferRequest extends Request
 
     /**
      * Set the session identifier from the previous step.
+     *
      * @param string $value session id
+     * @return self
      */
     public function setSessionId($value)
     {
@@ -43,8 +49,7 @@ class TransferRequest extends Request
     }
 
     /**
-     * Get the data for this request.
-     * @return array request data
+     * {@inheritdoc}
      */
     public function getData()
     {

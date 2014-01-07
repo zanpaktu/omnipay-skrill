@@ -3,12 +3,16 @@ namespace Omnipay\Skrill\Message;
 
 /**
  * Skrill Authorize Transfer Request
+ *
+ * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ * @version 2.16 Automated Payments Interface
  */
 class AuthorizeTransferRequest extends AuthRequest
 {
     /**
-     * Get the endpoint for this request.
-     * @return string endpoint
+     * {@inheritdoc}
      */
     protected function getEndpoint()
     {
@@ -16,8 +20,7 @@ class AuthorizeTransferRequest extends AuthRequest
     }
 
     /**
-     * Get the action name for this request.
-     * @return string action name
+     * {@inheritdoc}
      */
     protected function getAction()
     {
@@ -26,7 +29,7 @@ class AuthorizeTransferRequest extends AuthRequest
 
     /**
      * Get the subject of the notification email.
-     * Example: Your order is ready
+     *
      * @return string subject
      */
     public function getSubject()
@@ -36,8 +39,11 @@ class AuthorizeTransferRequest extends AuthRequest
 
     /**
      * Set the subject of the notification email.
+     *
      * Example: Your order is ready
+     *
      * @param string $value subject
+     * @return self
      */
     public function setSubject($value)
     {
@@ -45,8 +51,8 @@ class AuthorizeTransferRequest extends AuthRequest
     }
 
     /**
-     * Get the note to be included in the notification email.
-     * Example: Details are available at our site...
+     * Get the comment to be included in the notification email.
+     *
      * @return string note
      */
     public function getNote()
@@ -55,9 +61,12 @@ class AuthorizeTransferRequest extends AuthRequest
     }
 
     /**
-     * Set the note to be included in the notification email.
+     * Set the comment to be included in the notification email.
+     *
      * Example: Details are available at our site...
-     * @return string note
+     *
+     * @param string $value note
+     * @return self
      */
     public function setNote($value)
     {
@@ -65,40 +74,53 @@ class AuthorizeTransferRequest extends AuthRequest
     }
 
     /**
-     * Get the beneficiary's email address.
-     * @return string beneficiary's email
+     * Get the customer email address.
+     *
+     * @return string customer email
      */
-    public function getBeneficiaryEmail()
+    public function getCustomerEmail()
     {
-        return $this->getParameter('beneficiaryEmail');
+        return $this->getParameter('customerEmail');
     }
 
     /**
-     * Set the beneficiary's email address.
-     * @return string beneficiary's email
+     * Set the customer email address.
+     *
+     * @param string $value customer email
+     * @return self
      */
-    public function setBeneficiaryEmail($value)
+    public function setCustomerEmail($value)
     {
-        return $this->setParameter('beneficiaryEmail', $value);
+        return $this->setParameter('customerEmail', $value);
     }
 
     /**
-     * Get the data for this request.
-     * @return array request data
+     * {@inheritdoc}
      */
     public function getData()
     {
         // make sure we have the mandatory fields
-        $this->validate('amount', 'currency', 'subject', 'note', 'beneficiaryEmail');
+        $this->validate('amount', 'currency', 'subject', 'note', 'customerEmail');
 
         $data = parent::getData();
         $data['amount'] = $this->getAmount();
         $data['currency'] = $this->getCurrency();
         $data['subject'] = $this->getSubject();
         $data['note'] = $this->getNote();
-        $data['bnf_email'] = $this->getBeneficiaryEmail();
+        $data['bnf_email'] = $this->getCustomerEmail();
         $data['frn_trn_id'] = $this->getTransactionId();
 
         return $data;
+    }
+
+    /**
+     * Create the authorize response for this request.
+     *
+     * @param  \SimpleXMLElement  $xml  raw response
+     * @return AuthorizeResponse        response object for this request
+     */
+    protected function createResponse($xml)
+    {
+        return $this->response = new AuthorizeResponse($this, $xml);
     }
 }

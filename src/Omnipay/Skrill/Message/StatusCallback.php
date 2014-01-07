@@ -13,9 +13,11 @@ use Omnipay\Common\Message\AbstractResponse;
  * of posts exceeds 10.
  *
  * @author Joao Dias <joao.dias@cherrygroup.com>
+ * @copyright 2013-2014 Cherry Ltd.
+ * @license http://opensource.org/licenses/mit-license.php MIT
  * @version 6.19 Merchant Integration Manual
  */
-class StatusCallbackResponse extends AbstractResponse
+class StatusCallback extends AbstractResponse
 {
     /**
      * This status could be received only if the merchant's account is configured to
@@ -53,7 +55,7 @@ class StatusCallbackResponse extends AbstractResponse
     const STATUS_PROCESSED = 2;
 
     /**
-     * Construct a StatusCallbackResponse with the respective POST data.
+     * Construct a StatusCallback with the respective POST data.
      *
      * @param array $post post data
      */
@@ -83,7 +85,7 @@ class StatusCallbackResponse extends AbstractResponse
     }
 
     /**
-     * @see StatusCallbackResponse::getStatus() for the possible status codes.
+     * @see getStatus() for the possible status codes.
      *
      * @return int status
      */
@@ -144,7 +146,8 @@ class StatusCallbackResponse extends AbstractResponse
     /**
      * Get the unique ID for the customer's Skrill account.
      *
-     * To receive the customer id value, please contact your account manager or merchantservices@skrill.com
+     * To receive the customer id value, please contact your account manager or
+     * merchantservices@skrill.com
      *
      * @return int customer's id
      */
@@ -154,21 +157,21 @@ class StatusCallbackResponse extends AbstractResponse
     }
 
     /**
-     * Get the reference or identification number provided by the merchant.
+     * Get the unique reference or identification number provided by the merchant.
      *
-     * @return string transaction reference
+     * @return string transaction id
      */
-    public function getTransactionReference()
+    public function getTransactionId()
     {
         return $this->data['transaction_id'] ?: $this->getSkrillTransactionId();
     }
 
     /**
-     * Get Skrill's unique transaction ID for the transfer.
+     * Get Skrill's unique transaction reference for the transfer.
      *
-     * @return string transaction id
+     * @return string transaction reference
      */
-    public function getSkrillTransactionId()
+    public function getTransactionReference()
     {
         return $this->data['mb_transaction_id'];
     }
@@ -316,8 +319,8 @@ class StatusCallbackResponse extends AbstractResponse
      * Calculate the 256 bit message digest, expressed as a string of sixty-four
      * hexadecimal digits in lowercase.
      *
-     * The sha2sig is constructed by performing a SHA256 calculation on a string built up by
-     * concatenating the other fields returned to the status url.
+     * The sha2sig is constructed by performing a SHA256 calculation on a string built up
+     * by concatenating the other fields returned to the status url.
      *
      * @param  string  $secretWord  uppercase MD5 value of the ASCII equivalent of the
      *                              secret word submitted in the 'Merchant Tools' section
