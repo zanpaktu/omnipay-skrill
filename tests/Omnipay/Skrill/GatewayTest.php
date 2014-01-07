@@ -81,4 +81,18 @@ class GatewayTest extends GatewayTestCase
         $this->assertNull($response->getCode());
         $this->assertNull($response->getMessage());
     }
+
+    public function testTransferBalanceNotEnough()
+    {
+        $this->setMockHttpResponse('TransferError.txt');
+
+        $request = $this->gateway->transfer(array(
+            'sessionId' => '761d416b605f1d438326b890025ad562'
+        ));
+        $response = $request->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertNull($response->getCode());
+        $this->assertSame('BALANCE_NOT_ENOUGH', $response->getMessage());
+    }
 }
