@@ -33,6 +33,9 @@ class AuthorizeTransferRequestTest extends TestCase
 
         $data = $this->request->getData();
 
+        $this->assertSame('prepare', $data['action']);
+        $this->assertSame($expectedData['email'], $data['email']);
+        $this->assertSame($expectedData['password'], $data['password']);
         $this->assertSame($expectedData['amount'], $data['amount']);
         $this->assertSame($expectedData['currency'], $data['currency']);
         $this->assertSame($expectedData['subject'], $data['subject']);
