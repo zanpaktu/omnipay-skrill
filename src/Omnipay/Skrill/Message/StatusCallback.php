@@ -4,7 +4,7 @@ namespace Omnipay\Skrill\Message;
 use Omnipay\Common\Message\AbstractResponse;
 
 /**
- * Skrill Status Callback Response
+ * Skrill Status Callback
  *
  * When the payment process is complete Skrill's payment server will send the details of
  * the transaction to the status URL provided by the merchant. This is done with a
