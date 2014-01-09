@@ -35,7 +35,7 @@ class PaymentRequestTest extends TestCase
             'notifyUrl'            => 'http://php.unit/status',
             'notifyUrl2'           => 'http://php.unit/status2',
             'newWindowRedirect'    => 0,
-            'hideLogin'            => 0,
+            'hideLogin'            => false,
             'confirmationNote'     => 'confirmation note',
             'logoUrl'              => 'http://php.unit/logo.png',
             'referralId'           => 'ref_id',
@@ -78,7 +78,7 @@ class PaymentRequestTest extends TestCase
         $this->assertSame($expectedData['notifyUrl'], $data['status_url']);
         $this->assertSame($expectedData['notifyUrl2'], $data['status_url2']);
         $this->assertSame($expectedData['newWindowRedirect'], $data['new_window_redirect']);
-        $this->assertSame($expectedData['hideLogin'], $data['hide_login']);
+        $this->assertSame(0, $data['hide_login']);
         $this->assertSame($expectedData['confirmationNote'], $data['confirmation_note']);
         $this->assertSame($expectedData['logoUrl'], $data['logo_url']);
         $this->assertSame(1, $data['prepare_only']);
