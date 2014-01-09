@@ -17,173 +17,173 @@ abstract class PaymentMethod
      * Skrill Direct (Online Bank Transfer)
      * Supported countries: Germany, United Kingdom, France, Italy, Spain, Hungary, Austria
      */
-    const SkrillDirect              = 'OBT';
+    const SKRILL_DIRECT               = 'OBT';
 
     /**
      * Giropay
      * Supported countries: Germany
      */
-    const Giropay                   = 'GIR';
+    const GIROPAY                     = 'GIR';
 
     /**
      * Direct Debit / ELV
      * Supported countries: Germany
      */
-    const DirectDebitELV            = 'DIB';
+    const DIRECT_DEBIT_ELV            = 'DIB';
 
     /**
      * Sofortüberweisung
      * Supported countries: Germany, Austria, Belgium, Netherlands, Switzerland, United Kingdom
      */
-    const Sofortueberweisung        = 'SFT';
+    const SOFORTUEBERWEISUNG          = 'SFT';
 
     /**
      * eNETS
      * Supported countries: Singapore
      */
-    const eNETS                     = 'ENT';
+    const ENETS                       = 'ENT';
 
     /**
      * Nordea Solo
      * Supported countries: Sweden
      */
-    const NordeaSoloSwe             = 'EBT';
+    const NORDEA_SOLO_SWE             = 'EBT';
 
     /**
      * Nordea Solo
      * Supported countries: Finland
      */
-    const NordeaSoloFin             = 'SO2';
+    const NORDEA_SOLO_FIN             = 'SO2';
 
     /**
      * iDEAL
      * Supported countries: Netherlands
      */
-    const iDEAL                     = 'IDL';
+    const IDEAL                       = 'IDL';
 
     /**
      * EPS (Netpay)
      * Supported countries: Austria
      */
-    const EPS_Netpay                = 'NPY';
+    const EPS_NETPAY                  = 'NPY';
 
     /**
      * POLi
      * Supported countries: Australia
      */
-    const POLi                      = 'PLI';
+    const POLI                        = 'PLI';
 
     /**
      * All Polish Banks
      * Supported countries: Poland
      */
-    const AllPolishBanks            = 'PWY';
+    const ALL_POLISH_BANKS            = 'PWY';
 
     /**
      * ING Bank Slaski
      * Supported countries: Poland
      */
-    const INGBankSlaski             = 'PWY5';
+    const ING_BANK_SLASKI             = 'PWY5';
 
     /**
      * PKO BP (PKO Inteligo)
      * Supported countries: Poland
      */
-    const PKOBP_PKOInteligo         = 'PWY6';
+    const PKO_BP_PKO_INTELIGO         = 'PWY6';
 
     /**
      * Multibank (Multitransfer)
      * Supported countries: Poland
      */
-    const Multibank_Multitransfer   = 'PWY7';
+    const MULTIBANK_MULTITRANSFER     = 'PWY7';
 
     /**
      * Lukas Bank
      * Supported countries: Poland
      */
-    const LukasBank                 = 'PWY14';
+    const LUKAS_BANK                  = 'PWY14';
 
     /**
      * Bank BPH
      * Supported countries: Poland
      */
-    const BankBPH                   = 'PWY15';
+    const BANK_BPH                    = 'PWY15';
 
     /**
      * InvestBank
      * Supported countries: Poland
      */
-    const InvestBank                = 'PWY17';
+    const INVEST_BANK                 = 'PWY17';
 
     /**
      * PeKaO S.A.
      * Supported countries: Poland
      */
-    const PeKaOSA                   = 'PWY18';
+    const PEKAO_SA                    = 'PWY18';
 
     /**
      * Citibank handlowy
      * Supported countries: Poland
      */
-    const CitibankHandlowy          = 'PWY19';
+    const CITIBANK_HANDLOWY           = 'PWY19';
 
     /**
      * Bank Zachodni WBK (Przelew24)
      * Supported countries: Poland
      */
-    const BankZachodniWBK_Przelew24 = 'PWY20';
+    const BANK_ZACHODNI_WBK_PRZELEW24 = 'PWY20';
 
     /**
      * BGŻ
      * Supported countries: Poland
      */
-    const BGZ                       = 'PWY21';
+    const BGZ                         = 'PWY21';
 
     /**
      * Millenium
      * Supported countries: Poland
      */
-    const Millenium                 = 'PWY22';
+    const MILLENIUM                   = 'PWY22';
 
     /**
      * mBank (mTransfer)
      * Supported countries: Poland
      */
-    const mBank_mTransfer           = 'PWY25';
+    const MBANK_MTRANSFER             = 'PWY25';
 
     /**
      * Płace z Inteligo
      * Supported countries: Poland
      */
-    const PlaceZInteligo            = 'PWY26';
+    const PLACE_Z_INTELIGO            = 'PWY26';
 
     /**
      * Bank Ochrony Srodowiska
      * Supported countries: Poland
      */
-    const BankOchronySrodowiska     = 'PWY28';
+    const BANK_OCHRONY_SRODOWISKA     = 'PWY28';
 
     /**
      * Nordea
      * Supported countries: Poland
      */
-    const Nordea                    = 'PWY32';
+    const NORDEA                      = 'PWY32';
 
     /**
      * Fortis Bank
      * Supported countries: Poland
      */
-    const FortisBank                = 'PWY33';
+    const FORTIS_BANK                 = 'PWY33';
 
     /**
      * Deutsche Bank PBC S.A.
      * Supported countries: Poland
      */
-    const DeutscheBankPBCSA         = 'PWY36';
+    const DEUTSCHE_BANK_PBC_SA        = 'PWY36';
 
     /**
      * ePay.bg
      * Supported countries: Bulgaria
      */
-    const ePayBg                    = 'EPY';
+    const EPAY_BG                     = 'EPY';
 }
