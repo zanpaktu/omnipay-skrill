@@ -56,6 +56,7 @@ class PaymentRequestTest extends TestCase
             'amountDescriptions'   => array('key' => 'value'),
         );
         $this->request->initialize($expectedData);
+        $this->request->setPaymentMethod(PaymentMethod::SkrillDirect);
 
         $data = $this->request->getData();
 
@@ -102,5 +103,7 @@ class PaymentRequestTest extends TestCase
 
         $this->assertSame('key', $data['amount2_description']);
         $this->assertSame('value', $data['amount2']);
+
+        $this->assertSame(PaymentMethod::SkrillDirect, $data['payment_methods']);
     }
 }

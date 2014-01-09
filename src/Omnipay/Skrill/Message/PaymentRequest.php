@@ -729,6 +729,43 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
+     * Get the list of payment method codes, indicating the payment methods to be
+     * presented to the customer.
+     *
+     * @return array payment methods
+     */
+    public function getPaymentMethods()
+    {
+        return $this->getParameter('paymentMethods');
+    }
+
+    /**
+     * Set the list of payment method codes, indicating the payment methods to be
+     * presented to the customer.
+     *
+     * @param  array $value payment methods
+     * @return self
+     */
+    public function setPaymentMethods(array $value)
+    {
+        return $this->setParameter('paymentMethods', $value);
+    }
+
+    /**
+     * Set a payment method code, indicating the payment method to be presented to the
+     * customer.
+     *
+     * Warning: this resets any previously set payment methods.
+     *
+     * @param  string $value payment method
+     * @return self
+     */
+    public function setPaymentMethod($value)
+    {
+        return $this->setPaymentMethods(array($value));
+    }
+
+    /**
      * Get the data for this request.
      *
      * @return array request data
@@ -800,6 +837,12 @@ class PaymentRequest extends AbstractRequest
             $data['details' . $counter . '_description'] = $description;
             $data['details' . $counter . '_text'] = $text;
             $counter++;
+        }
+
+        // split gateway
+        $paymentMethods = $this->getPaymentMethods();
+        if (is_array($paymentMethods)) {
+            $data['payment_methods'] = implode(',', $paymentMethods);
         }
 
         return $data;
