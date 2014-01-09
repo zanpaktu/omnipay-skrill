@@ -279,7 +279,7 @@ class PaymentRequest extends AbstractRequest
      * Get whether the merchant show their customers the gateway page without the
      * prominent login section.
      *
-     * @return int hide login
+     * @return bool hide login
      */
     public function getHideLogin()
     {
@@ -290,11 +290,12 @@ class PaymentRequest extends AbstractRequest
      * Set whether the merchant show their customers the gateway page without the
      * prominent login section.
      *
-     * @param int $value hide login
+     * @param  bool $value hide login
+     * @return self
      */
     public function setHideLogin($value)
     {
-        return $this->setParameter('hideLogin', $value);
+        return $this->setParameter('hideLogin', (bool) $value);
     }
 
     /**
@@ -750,7 +751,7 @@ class PaymentRequest extends AbstractRequest
         $data['status_url'] = $this->getNotifyUrl();
         $data['status_url2'] = $this->getNotifyUrl2();
         $data['new_window_redirect'] = $this->getNewWindowRedirect();
-        $data['hide_login'] = $this->getHideLogin();
+        $data['hide_login'] = $this->getHideLogin() ? 1 : 0;
         $data['confirmation_note'] = $this->getConfirmationNote();
         $data['logo_url'] = $this->getLogoUrl();
         $data['prepare_only'] = 1;
