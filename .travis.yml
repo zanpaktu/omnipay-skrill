@@ -13,14 +13,16 @@ env:
 
 before_script:
   - composer self-update
-  - composer --version
   - composer require symfony/http-foundation:${SYMFONY_VERSION} --no-update
   - composer require guzzle/http:${GUZZLE_VERSION} --no-update
   - composer install -n --dev --prefer-source
 
 script:
+  - mkdir -p build/logs
+  - vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
   - vendor/bin/phpcs --standard=PSR2 src
-  - vendor/bin/phpunit --coverage-text
 
 after_script:
-  - vendor/bin/coveralls
+  - vendor/bin/coveralls -v
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
