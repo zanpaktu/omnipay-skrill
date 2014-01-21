@@ -163,7 +163,7 @@ class StatusCallback extends AbstractResponse
      */
     public function getTransactionId()
     {
-        return $this->data['transaction_id'] ?: $this->getSkrillTransactionId();
+        return $this->data['transaction_id'] ?: $this->getTransactionReference();
     }
 
     /**
