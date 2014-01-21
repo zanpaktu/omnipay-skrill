@@ -14,6 +14,21 @@ namespace Omnipay\Skrill\Message;
 abstract class PaymentMethod
 {
     /**
+     * Skrill Digital Wallet
+     */
+    const SKRILL_DIGITAL_WALLET       = 'WLT';
+
+    /**
+     * Visa
+     */
+    const VISA                        = 'VSA';
+
+    /**
+     * MasterCard
+     */
+    const MASTERCARD                  = 'MSC';
+
+    /**
      * Skrill Direct (Online Bank Transfer)
      * Supported countries: Germany, United Kingdom, France, Italy, Spain, Hungary, Austria
      */
