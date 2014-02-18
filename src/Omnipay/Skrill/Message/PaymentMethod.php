@@ -23,15 +23,92 @@ abstract class PaymentMethod
      */
     const SKRILL_DIGITAL_WALLET       = 'WLT';
 
+
+    // Credit/Debit Cards
+
+    /**
+     * All Card Types
+     * Countries: All
+     */
+    const ALL_CARD_TYPES              = 'ACC';
+
     /**
      * Visa
+     * Countries: All
      */
     const VISA                        = 'VSA';
 
     /**
      * MasterCard
+     * Countries: All
      */
     const MASTERCARD                  = 'MSC';
+
+    /**
+     * Visa Delta/Debit
+     * Countries: United Kingdom
+     */
+    const VISA_DELTA_DEBIT            = 'VSD';
+
+    /**
+     * Visa Electron
+     * Countries: All
+     */
+    const VISA_ELECTRON               = 'VSE';
+
+    /**
+     * Maestro
+     * Countries: United Kingdom, Spain, Austria
+     */
+    const MAESTRO                     = 'MAE';
+
+    /**
+     * American Express
+     * Countries: All
+     */
+    const AMERICAN_EXPRESS            = 'AMX';
+
+    /**
+     * Diners
+     * Countries: All
+     */
+    const DINERS                      = 'DIN';
+
+    /**
+     * JCB
+     * Countries: All
+     */
+    const JCB                         = 'JCB';
+
+    /**
+     * Laser
+     * Countries: Rep. of Ireland
+     */
+    const Laser                       = 'LSR';
+
+    /**
+     * Carte Bleue
+     * Countries: France
+     */
+    const CARTE_BLEUE                 = 'GCB';
+
+    /**
+     * Dankort
+     * Countries: Denmark
+     */
+    const DANKORT                     = 'DNK';
+
+    /**
+     * PostePay
+     * Countries: Italy
+     */
+    const POSTEPAY                    = 'PSP';
+
+    /**
+     * CartaSi
+     * Countries: Italy
+     */
+    const CARTASI                     = 'CSI';
 
     /**
      * Skrill Direct (Online Bank Transfer)
