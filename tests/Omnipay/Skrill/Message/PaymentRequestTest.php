@@ -1,6 +1,7 @@
 <?php
 namespace Omnipay\Skrill\Message;
 
+use DateTime;
 use Omnipay\Tests\TestCase;
 
 class PaymentRequestTest extends TestCase
@@ -45,7 +46,7 @@ class PaymentRequestTest extends TestCase
             'customerTitle'        => 'Mr',
             'customerFirstName'    => 'php',
             'customerLastName'     => 'unit',
-            'customerDateOfBirth'  => '03012014',
+            'customerBirthday'     => new DateTime('2014-01-03'),
             'customerAddress1'     => 'address1',
             'customerAddress2'     => 'address2',
             'customerPhone'        => '987654321',
@@ -92,7 +93,7 @@ class PaymentRequestTest extends TestCase
         $this->assertSame($expectedData['customerTitle'], $data['title']);
         $this->assertSame($expectedData['customerFirstName'], $data['firstname']);
         $this->assertSame($expectedData['customerLastName'], $data['lastname']);
-        $this->assertSame($expectedData['customerDateOfBirth'], $data['date_of_birth']);
+        $this->assertSame($expectedData['customerBirthday']->format('dmY'), $data['date_of_birth']);
         $this->assertSame($expectedData['customerAddress1'], $data['address']);
         $this->assertSame($expectedData['customerAddress2'], $data['address2']);
         $this->assertSame($expectedData['customerPhone'], $data['phone_number']);

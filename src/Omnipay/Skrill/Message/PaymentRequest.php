@@ -1,6 +1,7 @@
 <?php
 namespace Omnipay\Skrill\Message;
 
+use DateTime;
 use Omnipay\Common\Message\AbstractRequest;
 
 /**
@@ -504,25 +505,25 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the date of birth of the customer.
+     * Get the birthday of the customer.
      *
-     * @return string customer's date of birth
+     * @return DateTime|null customer's birthday
      */
-    public function getCustomerDateOfBirth()
+    public function getCustomerBirthday()
     {
-        return $this->getParameter('customerDateOfBirth');
+        return $this->getParameter('customerBirthday');
     }
 
     /**
-     * Set the date of birth of the customer.
+     * Set the birthday of the customer.
      *
      * The format is ddmmyyyy. Only numeric values are accepted.
      *
-     * @param string $value customer's date of birth
+     * @param DateTime|null $value customer's birthday
      */
-    public function setCustomerDateOfBirth($value)
+    public function setCustomerBirthday(DateTime $value = null)
     {
-        return $this->setParameter('customerDateOfBirth', $value);
+        return $this->setParameter('customerBirthday', $value);
     }
 
     /**
@@ -808,7 +809,10 @@ class PaymentRequest extends AbstractRequest
         $data['title'] = $this->getCustomerTitle();
         $data['firstname'] = $this->getCustomerFirstName();
         $data['lastname'] = $this->getCustomerLastName();
-        $data['date_of_birth'] = $this->getCustomerDateOfBirth();
+
+        $customerBirthday = $this->getCustomerBirthday();
+        $data['date_of_birth'] = $customerBirthday ? $customerBirthday->format('dmY') : null;
+
         $data['address'] = $this->getCustomerAddress1();
         $data['address2'] = $this->getCustomerAddress2();
         $data['phone_number'] = $this->getCustomerPhone();
