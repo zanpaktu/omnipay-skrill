@@ -9,10 +9,15 @@ namespace Omnipay\Skrill\Message;
  * @author Joao Dias <joao.dias@cherrygroup.com>
  * @copyright 2013-2014 Cherry Ltd.
  * @license http://opensource.org/licenses/mit-license.php MIT
- * @version 6.3 Merchant Integration Manual
+ * @version 6.5 Skrill Payment Gateway Integration Guide
  */
 abstract class PaymentMethod
 {
+    /**
+     * Skrill Direct
+     */
+    const SKRILL_DIRECT               = 'MBD';
+
     /**
      * Skrill Digital Wallet
      */
@@ -32,7 +37,7 @@ abstract class PaymentMethod
      * Skrill Direct (Online Bank Transfer)
      * Supported countries: Germany, United Kingdom, France, Italy, Spain, Hungary, Austria
      */
-    const SKRILL_DIRECT               = 'OBT';
+    const ONLINE_BANK_TRANSFER        = 'OBT';
 
     /**
      * Giropay
