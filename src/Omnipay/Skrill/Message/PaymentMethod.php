@@ -84,7 +84,7 @@ abstract class PaymentMethod
      * Laser
      * Countries: Rep. of Ireland
      */
-    const Laser                       = 'LSR';
+    const LASER                       = 'LSR';
 
     /**
      * Carte Bleue
