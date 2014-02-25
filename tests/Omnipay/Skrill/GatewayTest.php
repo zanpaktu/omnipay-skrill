@@ -29,6 +29,25 @@ class GatewayTest extends GatewayTestCase
         );
     }
 
+    public function testOptionalParametersHaveMatchingMethods()
+    {
+        $parameters = array(
+            'password',
+        );
+        foreach ($parameters as $parameter) {
+            $getter = 'get' . ucfirst($parameter);
+            $setter = 'set' . ucfirst($parameter);
+            $value = uniqid();
+
+            $this->assertTrue(method_exists($this->gateway, $getter), "Gateway must implement $getter()");
+            $this->assertTrue(method_exists($this->gateway, $setter), "Gateway must implement $setter()");
+
+            // setter must return instance
+            $this->assertSame($this->gateway, $this->gateway->$setter($value));
+            $this->assertSame($value, $this->gateway->$getter());
+        }
+    }
+
     public function testPurchaseSuccess()
     {
         $this->setMockHttpResponse('PaymentRequestSuccess.txt');
