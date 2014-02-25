@@ -16,10 +16,10 @@ use Omnipay\Common\Message\AbstractRequest;
  * redirecting the customer, he is able to see and possible modify the payment parameters
  * since their browser performs the actual request for the transaction.
  *
- * This class allows Skrill to prepare a session for the payment. We then use this session
- * details to redirect the user without sharing any payment information, where the normal
- * flow of events continues. This redirect must happen within 15 minutes of the original
- * request otherwise the session will expire.
+ * This class allows Skrill to prepare a session for the payment. We then use this
+ * session details to redirect the customer without sharing any payment information,
+ * where the normal flow of events continues. This redirect must happen within 15 minutes
+ * of the original request otherwise the session will expire.
  *
  * This way the details of the payment are communicated securely only between the
  * merchant's server and Skrill.
@@ -27,7 +27,7 @@ use Omnipay\Common\Message\AbstractRequest;
  * @author Joao Dias <joao.dias@cherrygroup.com>
  * @copyright 2013-2014 Cherry Ltd.
  * @license http://opensource.org/licenses/mit-license.php MIT
- * @version 6.19 Merchant Integration Manual
+ * @version 6.5 Skrill Payment Gateway Integration Guide
  */
 class PaymentRequest extends AbstractRequest
 {
@@ -39,7 +39,7 @@ class PaymentRequest extends AbstractRequest
     protected $endpoint = 'https://www.moneybookers.com/app/payment.pl';
 
     /**
-     * Get the email address of the merchant's skrill account.
+     * Get the email address of the merchant's Skrill account.
      *
      * @return string email
      */
@@ -49,7 +49,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the email address of the merchant's skrill account.
+     * Set the email address of the merchant's Skrill account.
      *
      * @param string $value email
      */
@@ -59,7 +59,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the description of the merchant, which will be shown on the gateway.
+     * Get the description to be shown on the Skrill Gateway page.
      *
      * @return string recipient description
      */
@@ -69,10 +69,10 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the description of the merchant, which will be shown on the gateway.
+     * Set the description to be shown on the Skrill Gateway page.
      *
-     * If no value is set, the merchant's email will be shown as the recipient
-     * of the payment. (max 30 characters)
+     * If no value is set, the merchant's email is shown as the recipient of the payment.
+     * (Max. 30 characters)
      *
      * @param string $value recipient description
      */
@@ -82,7 +82,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the URL to which the customer will be returned when the payment is made.
+     * Get the URL to which the customer is returned once the payment is made.
      *
      * @return string return url
      */
@@ -92,11 +92,11 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the URL to which the customer will be returned when the payment is made.
+     * Set the URL to which the customer is returned once the payment is made.
      *
-     * If this field is not filled, the gateway window will simply close automatically at
-     * the end of the transaction, so that the customer will be returned to the last page
-     * on the merchant's website where he has been before.
+     * If this field is not filled, the Skrill Gateway page closes automatically at the
+     * end of the transaction and the customer is returned to the page on the merchant's
+     * website from where they were redirected to Skrill.
      *
      * @param string $value return url
      */
@@ -106,7 +106,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the text on the button when the user finishes his payment.
+     * Get the text on the button when the customer finishes their payment.
      *
      * @return string return url text
      */
@@ -116,7 +116,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the text on the button when the user finishes his payment.
+     * Set the text on the button when the customer finishes their payment.
      *
      * @param string $value return url text
      */
@@ -126,8 +126,8 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the target in which the return url will be called upon successful payment from
-     * the customer.
+     * Get the target in which the return url value is displayed upon successful payment
+     * from the customer.
      *
      * @return int return url target
      */
@@ -137,8 +137,10 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the target in which the return url will be called upon successful payment from
-     * customer.
+     * Set the target in which the return url value is displayed upon successful payment
+     * from the customer.
+     *
+     * Default value is 1.
      *
      * * 1 = _top
      * * 2 = _parent
@@ -149,12 +151,11 @@ class PaymentRequest extends AbstractRequest
      */
     public function setReturnUrlTarget($value)
     {
-        return $this->setParameter('returnUrlTarget', $value);
+        return $this->setParameter('returnUrlTarget', (int) $value);
     }
 
     /**
-     * Get the URL to which the customer will be returned if the payment process is
-     * cancelled.
+     * Get the URL to which the customer is returned if the payment is cancelled.
      *
      * @return string cancel url
      */
@@ -164,12 +165,11 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the URL to which the customer will be returned if the payment process is
-     * cancelled.
+     * Set the URL to which the customer is returned if the payment is cancelled.
      *
-     * If this field is not filled, the gateway window will simply close automatically
-     * upon clicking the cancellation button, so the customer will be returned to the
-     * last page on the merchant's website where the customer has been before.
+     * If this field is not filled, the Skrill Gateway page closes automatically when the
+     * Cancel button is selected, and customer is returned to the page on the merchant's
+     * site from where they redirected to Skrill.
      *
      * @param string $value cancel url
      */
@@ -179,8 +179,8 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the target in which the cancel url will be called upon cancellation of payment
-     * from customer.
+     * Get the target in which the cancel url value is displayed upon cancellation of
+     * payment by the customer.
      *
      * @return int cancel url target
      */
@@ -190,8 +190,10 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the target in which the cancel url will be called upon cancellation of payment
-     * from customer.
+     * Set the target in which the cancel url value is displayed upon cancellation of
+     * payment by the customer.
+     *
+     * Default value is 1.
      *
      * * 1 = _top
      * * 2 = _parent
@@ -202,12 +204,12 @@ class PaymentRequest extends AbstractRequest
      */
     public function setCancelUrlTarget($value)
     {
-        return $this->setParameter('cancelUrlTarget', $value);
+        return $this->setParameter('cancelUrlTarget', (int) $value);
     }
 
     /**
-     * Get the secondary URL to which the transaction details will be posted after the
-     * payment process is complete.
+     * Get the second URL to which the transaction details are posted after the payment
+     * process is complete.
      *
      * @return string notify url 2
      */
@@ -217,11 +219,10 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the secondary URL to which the transaction details will be posted after the
-     * payment process is complete.
+     * Get the second URL to which the transaction details are posted after the payment
+     * process is complete.
      *
-     * Alternatively you may specify an email address to which you would like to receive
-     * the results.
+     * Alternatively, you may specify an email address where the results are sent.
      *
      * @param string $value notify url 2
      */
@@ -231,10 +232,10 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get whether the gateaway redirects customers to the Sofortueberweisung payment
-     * method in a new window instead of in the same window.
+     * Get whether the gateaway redirects customers to a new window instead of in the
+     * same browser window.
      *
-     * @return int new window redirect
+     * @return bool new window redirect
      */
     public function getNewWindowRedirect()
     {
@@ -242,16 +243,16 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set whether the gateaway redirects customers to the Sofortueberweisung payment
-     * method in a new window instead of in the same window.
+     * Set whether the gateaway redirects customers to a new window instead of in the
+     * same browser window.
      *
-     * The accepted values are 0 (default) and 1.
+     * e.g., for online bank transfer payment methods, such as Sofortueberweisung.
      *
-     * @param int $value new window redirect
+     * @param bool $value new window redirect
      */
     public function setNewWindowRedirect($value)
     {
-        return $this->setParameter('newWindowRedirect', $value);
+        return $this->setParameter('newWindowRedirect', (bool) $value);
     }
 
     /**
@@ -280,6 +281,7 @@ class PaymentRequest extends AbstractRequest
      * Get whether the merchant show their customers the gateway page without the
      * prominent login section.
      *
+     * @deprecated On the new payment page, the login fields are hidden by default.
      * @return bool hide login
      */
     public function getHideLogin()
@@ -291,6 +293,7 @@ class PaymentRequest extends AbstractRequest
      * Set whether the merchant show their customers the gateway page without the
      * prominent login section.
      *
+     * @deprecated On the new payment page, the login fields are hidden by default.
      * @param  bool $value hide login
      * @return self
      */
@@ -300,8 +303,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the note, confirmation number, PIN or any other message shown to the customer
-     * on the confirmation screen - the end step of the process.
+     * Get the confirmation message or other details at the end of the payment process.
      *
      * @return string confirmation note
      */
@@ -311,8 +313,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the note, confirmation number, PIN or any other message shown to the customer
-     * on the confirmation screen - the end step of the process.
+     * Set the confirmation message or other details at the end of the payment process.
      *
      * Line breaks &lt;br&gt; may be used for longer messages.
      *
@@ -324,7 +325,8 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the URL of the logo which you would like to appear at the top of the gateway.
+     * Get the URL of the logo which you would like to appear at the top of the Skrill
+     * page.
      *
      * @return string logo url
      */
@@ -334,11 +336,11 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the URL of the logo which you would like to appear at the top of the gateway.
+     * Set the URL of the logo which you would like to appear at the top of the Skrill
+     * page.
      *
-     * The logo must be accessible via HTTPS otherwise it will not be shown. For best
-     * integration results we recommend that merchants use logos with dimensions up to
-     * 200px in width and 50px in height.
+     * The logo must be accessible via HTTPS or it will not be shown. For best results
+     * use logos with dimensions up to 200px in width and 50px in height.
      *
      * @param string $value logo url
      */
@@ -348,7 +350,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the unique referral id or email of the affiliate from which the customer is
+     * Get the unique referral ID or email of an affiliate from which the customer is
      * referred.
      *
      * @return string referral id
@@ -359,10 +361,10 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the unique referral id or email of the affiliate from which the customer is
+     * Set the unique referral ID or email of an affiliate from which the customer is
      * referred.
      *
-     * The referral id value must be included within the actual payment request.
+     * The referral ID value must be included within the actual payment request.
      *
      * @param string $value referral id
      */
@@ -372,7 +374,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the additional identifier that merchants can pass in order to track
+     * Get the additional identifier that the merchant can use in order to track
      * affiliates.
      *
      * @return string ext. referral id
@@ -383,7 +385,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the additional identifier that merchants can pass in order to track
+     * Set the additional identifier that the merchant can use in order to track
      * affiliates.
      *
      * You MUST inform your account manager about the exact value that will be submitted
@@ -415,7 +417,7 @@ class PaymentRequest extends AbstractRequest
      *
      * @param array $value merchant fields
      */
-    public function setMerchantFields($value)
+    public function setMerchantFields(array $value)
     {
         return $this->setParameter('merchantFields', $value);
     }
@@ -433,7 +435,7 @@ class PaymentRequest extends AbstractRequest
     /**
      * Set the email address of the customer who is making the payment.
      *
-     * If left empty, the customer has to enter his email address himself.
+     * If left empty, the customer has to enter their email address.
      *
      * @param string $value customer's email
      */
@@ -505,7 +507,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Get the birthday of the customer.
+     * Get the date of birth of the customer.
      *
      * @return DateTime|null customer's birthday
      */
@@ -515,9 +517,7 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Set the birthday of the customer.
-     *
-     * The format is ddmmyyyy. Only numeric values are accepted.
+     * Set the date of birth of the customer.
      *
      * @param DateTime|null $value customer's birthday
      */
@@ -601,7 +601,7 @@ class PaymentRequest extends AbstractRequest
     /**
      * Set the customer's postal code or ZIP Code.
      *
-     * Only alphanumeric values are accepted. (no punctuation marks etc.)
+     * Only alphanumeric values are accepted. (e.g., no punctuation marks or dashes)
      *
      * @param string $value customer's postal code
      */
@@ -695,7 +695,7 @@ class PaymentRequest extends AbstractRequest
      *
      * @param array $value amount descriptions
      */
-    public function setAmountDescriptions($value)
+    public function setAmountDescriptions(array $value)
     {
         return $this->setParameter('amountDescriptions', $value);
     }
@@ -724,7 +724,7 @@ class PaymentRequest extends AbstractRequest
      *
      * @param array $value details
      */
-    public function setDetails($value)
+    public function setDetails(array $value)
     {
         return $this->setParameter('details', $value);
     }
@@ -788,7 +788,7 @@ class PaymentRequest extends AbstractRequest
         $data['cancel_url_target'] = $this->getCancelUrlTarget();
         $data['status_url'] = $this->getNotifyUrl();
         $data['status_url2'] = $this->getNotifyUrl2();
-        $data['new_window_redirect'] = $this->getNewWindowRedirect();
+        $data['new_window_redirect'] = $this->getNewWindowRedirect() ? 1 : 0;
         $data['hide_login'] = $this->getHideLogin() ? 1 : 0;
         $data['confirmation_note'] = $this->getConfirmationNote();
         $data['logo_url'] = $this->getLogoUrl();
@@ -811,7 +811,9 @@ class PaymentRequest extends AbstractRequest
         $data['lastname'] = $this->getCustomerLastName();
 
         $customerBirthday = $this->getCustomerBirthday();
-        $data['date_of_birth'] = $customerBirthday ? $customerBirthday->format('dmY') : null;
+        if ($customerBirthday) {
+            $data['date_of_birth'] = $customerBirthday->format('dmY');
+        }
 
         $data['address'] = $this->getCustomerAddress1();
         $data['address2'] = $this->getCustomerAddress2();
@@ -822,7 +824,7 @@ class PaymentRequest extends AbstractRequest
         $data['country'] = $this->getCustomerCountry();
 
         // payment details
-        $data['amount'] = $this->getAmount();
+        $data['amount'] = rtrim(rtrim($this->getAmount(), '0'), '.');
         $data['currency'] = $this->getCurrency();
 
         $amountDescriptions = $this->getAmountDescriptions();
@@ -853,14 +855,12 @@ class PaymentRequest extends AbstractRequest
     }
 
     /**
-     * Send the payment request.
-     *
-     * @return PaymentResponse response
+     * @param  array            $data  payment data to send
+     * @return PaymentResponse         payment response
      */
     public function sendData($data)
     {
         $httpResponse = $this->httpClient->post($this->getEndpoint(), null, $data)->send();
-
         return $this->response = new PaymentResponse($this, $httpResponse);
     }
 

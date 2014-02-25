@@ -13,33 +13,24 @@ use Omnipay\Common\Message\RedirectResponseInterface;
  * @author Joao Dias <joao.dias@cherrygroup.com>
  * @copyright 2013-2014 Cherry Ltd.
  * @license http://opensource.org/licenses/mit-license.php MIT
- * @version 6.19 Merchant Integration Manual
+ * @version 6.5 Skrill Payment Gateway Integration Guide
  */
 class PaymentResponse extends AbstractResponse implements RedirectResponseInterface
 {
     /**
-     * Is the response successful?
-     *
-     * @return boolean is successful
+     * @return false
      */
     public function isSuccessful()
     {
         return false;
     }
 
-    /**
-     * Does the response require a redirect?
-     *
-     * @return boolean is redirect
-     */
     public function isRedirect()
     {
         return $this->getSessionId() !== null;
     }
 
     /**
-     * Gets the redirect target url.
-     *
      * @return string redirect url
      */
     public function getRedirectUrl()
@@ -48,8 +39,6 @@ class PaymentResponse extends AbstractResponse implements RedirectResponseInterf
     }
 
     /**
-     * Get the required redirect method (either GET or POST).
-     *
      * @return string redirect method
      */
     public function getRedirectMethod()
@@ -58,9 +47,7 @@ class PaymentResponse extends AbstractResponse implements RedirectResponseInterf
     }
 
     /**
-     * Gets the redirect form data array, if the redirect method is POST.
-     *
-     * @return array redirect data
+     * @return null
      */
     public function getRedirectData()
     {
@@ -70,7 +57,7 @@ class PaymentResponse extends AbstractResponse implements RedirectResponseInterf
     /**
      * Get the session identifier to be submitted at the next step.
      *
-     * @return string session id
+     * @return string|null session id
      */
     public function getSessionId()
     {
@@ -82,7 +69,7 @@ class PaymentResponse extends AbstractResponse implements RedirectResponseInterf
     /**
      * Get the skrill status of this response.
      *
-     * @return string|null status
+     * @return string status
      */
     public function getStatus()
     {
@@ -90,7 +77,7 @@ class PaymentResponse extends AbstractResponse implements RedirectResponseInterf
     }
 
     /**
-     * Get a status code associated with this response.
+     * Get the status code.
      *
      * @return string|null status code
      */
@@ -101,7 +88,7 @@ class PaymentResponse extends AbstractResponse implements RedirectResponseInterf
     }
 
     /**
-     * Get a status message associated with this response.
+     * Get the status message.
      *
      * @return string|null status message
      */
