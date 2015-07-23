@@ -36,7 +36,7 @@ class PaymentRequest extends AbstractRequest
      *
      * @var string
      */
-    protected $endpoint = 'https://www.moneybookers.com/app/payment.pl';
+    protected $endpoint = 'https://pay.skrill.com';
 
     /**
      * Get the email address of the merchant's Skrill account.
