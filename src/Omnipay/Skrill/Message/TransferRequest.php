@@ -14,14 +14,6 @@ class TransferRequest extends Request
     /**
      * {@inheritdoc}
      */
-    protected function getEndpoint()
-    {
-        return 'https://www.moneybookers.com/app/pay.pl';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getAction()
     {
         return 'transfer';

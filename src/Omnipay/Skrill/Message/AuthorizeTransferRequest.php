@@ -14,14 +14,6 @@ class AuthorizeTransferRequest extends AuthRequest
     /**
      * {@inheritdoc}
      */
-    protected function getEndpoint()
-    {
-        return 'https://www.moneybookers.com/app/pay.pl';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getAction()
     {
         return 'prepare';
