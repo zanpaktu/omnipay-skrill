@@ -27,7 +27,10 @@ abstract class Request extends AbstractRequest
      *
      * @return string endpoint
      */
-    abstract protected function getEndpoint();
+    protected function getEndpoint()
+    {
+        return 'https://pay.skrill.com';
+    }
 
     /**
      * Get the action name for this request.
