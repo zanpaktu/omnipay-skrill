@@ -56,6 +56,13 @@ class StatusCallback extends AbstractResponse
     const STATUS_PROCESSED = 2;
 
     /**
+     * Flag enablig/disablig md5 signature check
+     *
+     * @var bool
+     */
+    protected $md5TestEnabled = true;
+
+    /**
      * Construct a StatusCallback with the respective POST data.
      *
      * @param array $post post data
@@ -63,6 +70,16 @@ class StatusCallback extends AbstractResponse
     public function __construct(array $post)
     {
         $this->data = $post;
+    }
+
+    /**
+     * @param bool $md5TestEnabled
+     * @return $this
+     */
+    public function setMd5TestEnabled($md5TestEnabled)
+    {
+        $this->md5TestEnabled = $md5TestEnabled;
+        return $this;
     }
 
     /**
@@ -206,11 +223,18 @@ class StatusCallback extends AbstractResponse
     /**
      * Get the total amount of the payment in merchant's currency.
      *
-     * @return double amount
+     * @param $stringFormat
+     * @return float|string amount
      */
-    public function getSkrillAmount()
+    public function getSkrillAmount($stringFormat = false)
     {
-        return (double)$this->data['mb_amount'];
+        $amount = (double)$this->data['mb_amount'];
+
+        if ($stringFormat) {
+            $amount = number_format($amount, 2, '.', '');
+        }
+
+        return $amount;
     }
 
     /**
@@ -333,7 +357,7 @@ class StatusCallback extends AbstractResponse
             $this->getMerchantId() .
             $this->getTransactionReference() .
             $this->getSecretWordForMd5Signature() .
-            $this->getSkrillAmount() .
+            $this->getSkrillAmount(true) .
             $this->getSkrillCurrency() .
             $this->getStatus()
         ));
@@ -397,7 +421,7 @@ class StatusCallback extends AbstractResponse
     public function getMessage()
     {
         if (!$this->testMdSignatures()) {
-            return "MD5 signature {$this->calculateMd5Signature()} doesn't match {$this->getMd5Signature()}";
+            return "MD5 signature {$this->calculateMd5Signature()} ({$this->data['secretWord']}) doesn't match {$this->getMd5Signature()}";
         } else {
             return parent::getMessage();
         }
@@ -406,9 +430,9 @@ class StatusCallback extends AbstractResponse
     /**
      * @return bool
      */
-    protected function testMdSignatures()
+    public function testMdSignatures()
     {
-        return $this->getMd5Signature() == $this->calculateMd5Signature();
+        return (false === $this->md5TestEnabled) || $this->getMd5Signature() == $this->calculateMd5Signature();
     }
 
     /**
