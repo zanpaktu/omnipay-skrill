@@ -1,4 +1,5 @@
 <?php
+
 namespace Omnipay\Skrill\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
@@ -71,7 +72,7 @@ class StatusCallback extends AbstractResponse
      */
     public function isSuccessful()
     {
-        if ($this->getMd5Signature() !== $this->calculateMd5Signature()) {
+        if (!$this->testMdSignatures()) {
             return false;
         }
 
@@ -85,7 +86,7 @@ class StatusCallback extends AbstractResponse
      */
     public function isCancelled()
     {
-        if ($this->getMd5Signature() !== $this->calculateMd5Signature()) {
+        if (!$this->testMdSignatures()) {
             return false;
         }
 
@@ -99,7 +100,7 @@ class StatusCallback extends AbstractResponse
      */
     protected function validateSignatures()
     {
-        if ($this->getMd5Signature() !== $this->calculateMd5Signature()) {
+        if (!$this->testMdSignatures()) {
             return false;
         }
 
@@ -330,8 +331,8 @@ class StatusCallback extends AbstractResponse
     {
         return strtoupper(md5(
             $this->getMerchantId() .
-            $this->getTransactionId() .
-            $this->getSecretWord() .
+            $this->getTransactionReference() .
+            $this->getSecretWordForMd5Signature() .
             $this->getSkrillAmount() .
             $this->getSkrillCurrency() .
             $this->getStatus()
@@ -351,8 +352,8 @@ class StatusCallback extends AbstractResponse
     {
         return hash('sha256',
             $this->getMerchantId() .
-            $this->getTransactionId() .
-            $this->getSecretWord() .
+            $this->getTransactionReference() .
+            $this->getSecretWordForMd5Signature() .
             $this->getSkrillAmount() .
             $this->getSkrillCurrency() .
             $this->getStatus()
@@ -362,7 +363,7 @@ class StatusCallback extends AbstractResponse
     /**
      * Get the merchant's email address.
      *
-     * @return string email
+     * @return string
      */
     public function getEmail()
     {
@@ -376,7 +377,7 @@ class StatusCallback extends AbstractResponse
      */
     public function getPassword()
     {
-        return isset($this->data['password']) ? $this->data['password'] : null;
+        return isset($this->data['password']) ? strtoupper($this->data['password']) : '';
     }
 
     /**
@@ -391,26 +392,44 @@ class StatusCallback extends AbstractResponse
     }
 
     /**
-     * Get the secret word used for signatures.
-     *
-     * @return string Secret word
+     * @return string
      */
-    public function getSecretWord()
+    public function getMessage()
     {
-        if (!isset($this->data['secretWord'])) {
-            return null;
+        if (!$this->testMdSignatures()) {
+            return "MD5 signature {$this->calculateMd5Signature()} doesn't match {$this->getMd5Signature()}";
+        } else {
+            return parent::getMessage();
         }
-
-        $secretWord = $this->data['secretWord'];
-
-        // The MD5 hash will be 32 characters long; if it isn't, assume it's the plaintext password
-        if (strlen($secretWord) !== 32) {
-            $secretWord = md5($secretWord);
-        }
-
-        // Make sure it's uppercase
-        $secretWord = strtoupper($secretWord);
-
-        return $secretWord;
     }
+
+    /**
+     * @return bool
+     */
+    protected function testMdSignatures()
+    {
+        return $this->getMd5Signature() == $this->calculateMd5Signature();
+    }
+
+    /**
+     * @param string $secretWord
+     * @return $this
+     */
+    public function setSecretWord($secretWord)
+    {
+        $this->data['secretWord'] = $secretWord;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSecretWordForMd5Signature()
+    {
+        $secretWord = isset($this->data['secretWord']) ? $this->data['secretWord'] : '';
+
+        return strtoupper(md5($secretWord));
+    }
+
 }

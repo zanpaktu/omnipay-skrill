@@ -29,7 +29,6 @@ class Gateway extends AbstractGateway
         return [
             'email'      => '',
             'notifyUrl'  => '',
-            'secretWord' => '',
             'testMode'   => false,
         ];
     }
