@@ -56,13 +56,6 @@ class StatusCallback extends AbstractResponse
     const STATUS_PROCESSED = 2;
 
     /**
-     * Flag enablig/disablig md5 signature check
-     *
-     * @var bool
-     */
-    protected $md5TestEnabled = true;
-
-    /**
      * Construct a StatusCallback with the respective POST data.
      *
      * @param array $post post data
@@ -70,16 +63,6 @@ class StatusCallback extends AbstractResponse
     public function __construct(array $post)
     {
         $this->data = $post;
-    }
-
-    /**
-     * @param bool $md5TestEnabled
-     * @return $this
-     */
-    public function setMd5TestEnabled($md5TestEnabled)
-    {
-        $this->md5TestEnabled = $md5TestEnabled;
-        return $this;
     }
 
     /**
@@ -401,7 +384,7 @@ class StatusCallback extends AbstractResponse
      */
     public function getPassword()
     {
-        return isset($this->data['password']) ? strtoupper($this->data['password']) : '';
+        return isset($this->data['password']) ? $this->data['password'] : null;
     }
 
     /**
@@ -432,7 +415,7 @@ class StatusCallback extends AbstractResponse
      */
     public function testMdSignatures()
     {
-        return (false === $this->md5TestEnabled) || $this->getMd5Signature() == $this->calculateMd5Signature();
+        return (! $this->getSecretWord()) || $this->getMd5Signature() == $this->calculateMd5Signature();
     }
 
     /**
@@ -446,14 +429,17 @@ class StatusCallback extends AbstractResponse
         return $this;
     }
 
+    public function getSecretWord()
+    {
+        return isset($this->data['secretWord']) ? $this->data['secretWord'] : null;
+    }
+
     /**
      * @return string
      */
     protected function getSecretWordForMd5Signature()
     {
-        $secretWord = isset($this->data['secretWord']) ? $this->data['secretWord'] : '';
-
-        return strtoupper(md5($secretWord));
+        return strtoupper($this->getSecretWord());
     }
 
 }
