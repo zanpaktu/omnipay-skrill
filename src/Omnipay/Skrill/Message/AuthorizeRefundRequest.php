@@ -17,6 +17,14 @@ class AuthorizeRefundRequest extends AuthRequest
     /**
      * {@inheritdoc}
      */
+    protected function getEndpoint()
+    {
+        return 'https://www.skrill.com/app/refund.pl';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getAction()
     {
         return 'prepare';

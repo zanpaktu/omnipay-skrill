@@ -32,13 +32,6 @@ use Omnipay\Common\Message\AbstractRequest;
 class PaymentRequest extends AbstractRequest
 {
     /**
-     * Endpoint for this request.
-     *
-     * @var string
-     */
-    protected $endpoint = 'https://pay.skrill.com';
-
-    /**
      * Get the email address of the merchant's Skrill account.
      *
      * @return string email
@@ -977,6 +970,6 @@ class PaymentRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint;
+        return 'https://pay.skrill.com';
     }
 }
