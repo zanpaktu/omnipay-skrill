@@ -14,6 +14,14 @@ class TransferRequest extends Request
     /**
      * {@inheritdoc}
      */
+    protected function getEndpoint()
+    {
+        return 'https://www.skrill.com/app/pay.pl';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getAction()
     {
         return 'transfer';
