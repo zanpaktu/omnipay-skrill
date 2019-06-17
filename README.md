@@ -2,12 +2,8 @@
 
 **Skrill driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/alfaproject/omnipay-skrill.png?branch=master)](https://travis-ci.org/alfaproject/omnipay-skrill)
-[![Coverage Status](https://coveralls.io/repos/alfaproject/omnipay-skrill/badge.png?branch=master)](https://coveralls.io/r/alfaproject/omnipay-skrill?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/52c6cf75ec1375074900000f/badge.png)](https://www.versioneye.com/user/projects/52c6cf75ec1375074900000f)
+[![Build Status](https://travis-ci.org/zanpaktu/omnipay-skrill.svg?branch=master)](https://travis-ci.org/zanpaktu/omnipay-skrill)
 
-[![Latest Stable Version](https://poser.pugx.org/alfaproject/omnipay-skrill/version.png)](https://packagist.org/packages/alfaproject/omnipay-skrill)
-[![Total Downloads](https://poser.pugx.org/alfaproject/omnipay-skrill/d/total.png)](https://packagist.org/packages/alfaproject/omnipay-skrill)
 
 [Omnipay](https://github.com/omnipay/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.6+. This package implements Skrill support for Omnipay v3.0.
