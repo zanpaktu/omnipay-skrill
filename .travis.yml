@@ -37,10 +37,6 @@ before_install:
   # After CodeSniffer install you should refresh your path.
   - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
 
-install:
-  - if [[ $setup = 'basic' ]]; then travis_retry composer install --prefer-dist --no-interaction; fi
-  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable; fi
-
 # Run test script commands.
 # All commands must exit with code 0 on success. Anything else is considered failure.
 script:
