@@ -1,9 +1,8 @@
-.idea
-
-build
-vendor
-
-composer.phar
+/vendor
 composer.lock
-
+composer.phar
 phpunit.xml
+.directory
+/dirlist.*
+/documents/
+/.idea/

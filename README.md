@@ -10,26 +10,21 @@
 [![Total Downloads](https://poser.pugx.org/alfaproject/omnipay-skrill/d/total.png)](https://packagist.org/packages/alfaproject/omnipay-skrill)
 
 [Omnipay](https://github.com/omnipay/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.3+. This package implements Skrill support for Omnipay.
+processing library for PHP 5.6+. This package implements Skrill support for Omnipay v3.0.
 
 ## Installation
 
-Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply add it
-to your `composer.json` file:
+To install, simply add it to your composer.json file:
 
 ```json
 {
     "require": {
-        "alfaproject/omnipay-skrill": "dev-master"
+        "zanpaktu/omnipay-sofort": "~3.0"
     }
 }
 ```
 
-And run composer to update your dependencies:
-
-    $ curl -s http://getcomposer.org/installer | php
-    $ php composer.phar update
-
+and run `composer update`
 ## Basic Usage
 
 The following gateways are provided by this package:
