@@ -357,14 +357,11 @@ class StatusCallback extends AbstractResponse
      */
     public function calculateSha2Signature()
     {
-        return hash('sha256',
-            $this->getMerchantId() .
-            $this->getTransactionReference() .
-            $this->getSecretWordForMd5Signature() .
-            $this->getSkrillAmount() .
-            $this->getSkrillCurrency() .
-            $this->getStatus()
-        );
+        $part1 =  $this->getMerchantId() . $this->getTransactionReference();
+        $part2 =  $this->getSecretWordForMd5Signature() . $this->getSkrillAmount();
+        $part3 =  $this->getSkrillCurrency() . $this->getStatus();
+
+        return hash('sha256', $part1 . $part2 . $part3);
     }
 
     /**
@@ -404,7 +401,9 @@ class StatusCallback extends AbstractResponse
     public function getMessage()
     {
         if (!$this->testMdSignatures()) {
-            return "MD5 signature {$this->calculateMd5Signature()} ({$this->data['secretWord']}) doesn't match {$this->getMd5Signature()}";
+            $signature = "{$this->calculateMd5Signature()} ({$this->data['secretWord']})";
+
+            return "MD5 signature $signature doesn't match {$this->getMd5Signature()}";
         } else {
             return parent::getMessage();
         }
@@ -441,5 +440,4 @@ class StatusCallback extends AbstractResponse
     {
         return strtoupper($this->getSecretWord());
     }
-
 }
