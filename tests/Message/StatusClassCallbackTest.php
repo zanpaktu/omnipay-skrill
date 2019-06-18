@@ -2,7 +2,7 @@
 
 namespace Omnipay\Skrill\Message;
 
-class StatusClassCallbackTest extends \PHPUnit_Framework_TestCase
+class StatusClassCallbackTest extends \PHPUnit\Framework\TestCase
 {
     public function testCalculateMd5Signature()
     {

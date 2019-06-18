@@ -52,4 +52,9 @@ class CompletePurchaseRequest extends AbstractRequest
     {
         return $this->response = new StatusCallback($data);
     }
+
+    public function getEmail()
+    {
+        return $this->getParameter('email');
+    }
 }

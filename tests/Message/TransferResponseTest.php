@@ -8,7 +8,7 @@ class TransferResponseTest extends TestCase
     public function testTransferProcessed()
     {
         $httpResponse = $this->getMockHttpResponse('TransferProcessed.txt');
-        $response = new TransferResponse($this->getMockRequest(), $httpResponse->xml());
+        $response = new TransferResponse($this->getMockRequest(), new \SimpleXMLElement($httpResponse->getBody()->getContents()));
 
         $this->assertTrue($response->isSuccessful());
         $this->assertSame(20.12, $response->getAmount());
