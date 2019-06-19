@@ -15,7 +15,7 @@ To install, simply add it to your composer.json file:
 ```json
 {
     "require": {
-        "zanpaktu/omnipay-sofort": "~3.0"
+        "zanpaktu/omnipay-skrill": "~3.0"
     }
 }
 ```
